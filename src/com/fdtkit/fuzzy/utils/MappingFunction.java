@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fdtkit.fuzzy.fuzzydt;
+package com.fdtkit.fuzzy.utils;
 
 import java.util.Arrays;
 

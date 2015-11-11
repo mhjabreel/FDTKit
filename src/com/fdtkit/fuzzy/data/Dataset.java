@@ -14,20 +14,42 @@ import java.util.List;
  */
 public class Dataset {
     
-    private List<Row> rows;
-    private List<Attribute> attribues;
+    private List<Row> rows = null;
+    private List<Attribute> attribues = null;
     
     
     private String name;
+    
+    private String className;
 
-    public Dataset(String name) {
+    public Dataset(String name, String className) {
         this.name = name;
+        this.className = className;
+        this.attribues = new ArrayList<>();
+        this.rows = new ArrayList<>();        
+    }
+
+    public Dataset() {
         this.attribues = new ArrayList<>();
         this.rows = new ArrayList<>();
     }
     
-    public Dataset() {
-        this("");
+      
+    
+
+    public Dataset(String className) {
+        this.className = className;
+        this.name = "";
+        this.attribues = new ArrayList<>();
+        this.rows = new ArrayList<>();
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public String getName() {

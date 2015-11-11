@@ -5,9 +5,17 @@
  */
 package com.fdtkit.fuzzy.fuzzydt;
 
+import com.fdtkit.fuzzy.utils.QuadraticMappingFunction;
 import com.fdtkit.fuzzy.data.Attribute;
 import com.fdtkit.fuzzy.data.Dataset;
 import com.fdtkit.fuzzy.data.Row;
+import com.fdtkit.fuzzy.utils.AmbiguityMeasure;
+import com.fdtkit.fuzzy.utils.FuzzyPartitionEntropyMeasure;
+import com.fdtkit.fuzzy.utils.GeneralizedFuzzyPartitionEntropyMeasure;
+import com.fdtkit.fuzzy.utils.GeneralizedLeafDeterminer;
+import com.fdtkit.fuzzy.utils.LeafDeterminer;
+import com.fdtkit.fuzzy.utils.LeafDeterminerBase;
+import com.fdtkit.fuzzy.utils.PreferenceMeasure;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,7 +27,7 @@ import java.io.IOException;
  */
 public class Test2 {
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        Dataset d = new Dataset("Sample1");
+        Dataset d = new Dataset();
         
         BufferedReader br = new BufferedReader(new FileReader("data/test.txt"));
         
@@ -34,6 +42,7 @@ public class Test2 {
                 String [] terms = line.substring(line.indexOf(":") + 1).split(" ");
                 d.addAttribute(new Attribute(line.substring(1, line.indexOf(":") ), terms));                
                 className = line.substring(1, line.indexOf(":"));
+                d.setClassName(className);
             }
             else if(line.startsWith("=ROW=")) {
                 String [] data = line.split(" ");
@@ -56,29 +65,106 @@ public class Test2 {
         
         br.close();
         
-        GFID3 gfid3 = new GFID3(0.8, new QuadraticMappingFunction());
+        PreferenceMeasure preferenceMeasure;
+        LeafDeterminer leafDeterminer;
+        TreeNode root;
+        FuzzyDescisionTreeBase descisionTree;
+        String[] rules;
+        System.out.println("Ambiguity induction fuzzy decision tree");
+        preferenceMeasure = new AmbiguityMeasure(0.5);
+        leafDeterminer = new LeafDeterminerBase(0.8);        
+        descisionTree = new FuzzyDescisionTreeBase(preferenceMeasure, leafDeterminer);
         
-        TreeNode root = gfid3.buildTree(d, "Plan");
+        root = descisionTree.buildTree(d);
         
-        gfid3.printTree(root, "");  
+        descisionTree.printTree(root, "");  
         
-        String[] rules = gfid3.generateRules(root);
+        rules = descisionTree.generateRules(root);
         for(String rule : rules) {
             System.out.println(rule);
         }
         
         System.out.println("");
-        System.out.println("Simplifying rules:");
-        for(String rule : rules) {
-            System.out.println(gfid3.simplifyRule(d, rule, "Plan"));
-        }         
-        
-        for(int i = 0; i < rules.length;i++) {
-            rules[i] = gfid3.simplifyRule(d, rules[i], "Plan");
-        }
+  
         System.out.println("Trainingset Prediction:");
         for(int j = 0; j < 16; j++) {
-            double[] cVals = gfid3.classify(j, d, "Plan", rules);
+            double[] cVals = descisionTree.classify(j, d, "Plan", rules);
+            for(int i = 0; i < cVals.length; i++) {
+                System.out.print(String.format("%.2f     ", cVals[i]));
+            }
+            System.out.println("");
+        }         
+        
+        System.out.println("FID3 fuzzy decision tree");
+        preferenceMeasure = new FuzzyPartitionEntropyMeasure();
+        leafDeterminer = new LeafDeterminerBase(0.8);        
+        descisionTree = new FuzzyDescisionTreeBase(preferenceMeasure, leafDeterminer);
+        
+        root = descisionTree.buildTree(d);
+        
+        descisionTree.printTree(root, "");  
+        
+        rules = descisionTree.generateRules(root);
+        for(String rule : rules) {
+            System.out.println(rule);
+        }
+        
+        System.out.println("");
+  
+        System.out.println("Trainingset Prediction:");
+        for(int j = 0; j < 16; j++) {
+            double[] cVals = descisionTree.classify(j, d, "Plan", rules);
+            for(int i = 0; i < cVals.length; i++) {
+                System.out.print(String.format("%.2f     ", cVals[i]));
+            }
+            System.out.println("");
+        }         
+        System.out.println("GFID3 fuzzy decision tree, with linear maping function {I(t) = t}");
+        preferenceMeasure = new GeneralizedFuzzyPartitionEntropyMeasure();
+        leafDeterminer = new GeneralizedLeafDeterminer(0.8);
+        descisionTree = new FuzzyDescisionTreeBase(preferenceMeasure, leafDeterminer);
+        
+        
+        root = descisionTree.buildTree(d);
+        
+        descisionTree.printTree(root, "");  
+        
+        rules = descisionTree.generateRules(root);
+        for(String rule : rules) {
+            System.out.println(rule);
+        }
+        
+        System.out.println("");
+  
+        System.out.println("Trainingset Prediction:");
+        for(int j = 0; j < 16; j++) {
+            double[] cVals = descisionTree.classify(j, d, "Plan", rules);
+            for(int i = 0; i < cVals.length; i++) {
+                System.out.print(String.format("%.2f     ", cVals[i]));
+            }
+            System.out.println("");
+        } 
+        
+        System.out.println("GFID3 fuzzy decision tree, with quadratic maping function {I(t) = t^2}");
+        preferenceMeasure = new GeneralizedFuzzyPartitionEntropyMeasure(new QuadraticMappingFunction());
+        leafDeterminer = new GeneralizedLeafDeterminer(0.8, new QuadraticMappingFunction());
+        descisionTree = new FuzzyDescisionTreeBase(preferenceMeasure, leafDeterminer);
+        
+        
+        root = descisionTree.buildTree(d);
+        
+        descisionTree.printTree(root, "");  
+        
+        rules = descisionTree.generateRules(root);
+        for(String rule : rules) {
+            System.out.println(rule);
+        }
+        
+        System.out.println("");
+  
+        System.out.println("Trainingset Prediction:");
+        for(int j = 0; j < 16; j++) {
+            double[] cVals = descisionTree.classify(j, d, "Plan", rules);
             for(int i = 0; i < cVals.length; i++) {
                 System.out.print(String.format("%.2f     ", cVals[i]));
             }

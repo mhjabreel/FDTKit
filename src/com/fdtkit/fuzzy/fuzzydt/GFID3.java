@@ -5,6 +5,7 @@
  */
 package com.fdtkit.fuzzy.fuzzydt;
 
+import com.fdtkit.fuzzy.utils.MappingFunction;
 import com.fdtkit.fuzzy.data.Dataset;
 import com.fdtkit.fuzzy.utils.Utils;
 import java.io.File;
