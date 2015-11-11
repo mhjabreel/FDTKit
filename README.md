@@ -7,28 +7,20 @@ E-mail: mhjabreel@gmail.com <br/>
 Researchgate: https://www.researchgate.net/profile/Mohammed_Jabreel
 ###  Algorithms: ###
 
-Induction of fuzzy decision trees (1995)
-=============
-http://www.sciencedirect.com/science/article/pii/016501149400229Z
-### Authors of the paper: ###
+### Induction of fuzzy decision trees (1995) ###
 Yufei Yuan, Michael J. Shaw <br/>
+http://www.sciencedirect.com/science/article/pii/016501149400229Z
 
-
-Fuzzy ID3 Algorithm Based on Generating Hartley Measure (2011)
-=============
-http://link.springer.com/chapter/10.1007%2F978-3-642-23982-3_24
-### Authors of the paper: ###
+### Fuzzy ID3 Algorithm Based on Generating Hartley Measure (2011) ###
 Fachao Li, Dandan Jiang<br/>
-
-A generalized fuzzy ID3 algorithm using generalized information entropy (2014)
-=============
 http://link.springer.com/chapter/10.1007%2F978-3-642-23982-3_24
-### Authors of the paper: ###
-Chenxia Jina, Fachao Lia, Yan Lib<br/>
 
-The ouput of the example file "com\fdtkit\fuzzy\fuzzydt\Example.java" is:
+### A generalized fuzzy ID3 algorithm using generalized information entropy (2014) ### 
+Chenxia Jina, Fachao Lia, Yan Lib<br/>
+http://link.springer.com/chapter/10.1007%2F978-3-642-23982-3_24
 
 ### Example Output: ###
+The ouput of the example file "com\fdtkit\fuzzy\fuzzydt\Example.java" is:
 ```
 Ambiguity induction fuzzy decision tree
 |Outlook|
