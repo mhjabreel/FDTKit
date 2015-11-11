@@ -68,12 +68,12 @@ public class Example {
         PreferenceMeasure preferenceMeasure;
         LeafDeterminer leafDeterminer;
         TreeNode root;
-        FuzzyDescisionTreeBase descisionTree;
+        FuzzyDecisionTree descisionTree;
         String[] rules;
         System.out.println("Ambiguity induction fuzzy decision tree");
         preferenceMeasure = new AmbiguityMeasure(0.5);
         leafDeterminer = new LeafDeterminerBase(0.8);        
-        descisionTree = new FuzzyDescisionTreeBase(preferenceMeasure, leafDeterminer);
+        descisionTree = new FuzzyDecisionTree(preferenceMeasure, leafDeterminer);
         
         root = descisionTree.buildTree(d);
         
@@ -98,7 +98,7 @@ public class Example {
         System.out.println("FID3 fuzzy decision tree");
         preferenceMeasure = new FuzzyPartitionEntropyMeasure();
         leafDeterminer = new LeafDeterminerBase(0.8);        
-        descisionTree = new FuzzyDescisionTreeBase(preferenceMeasure, leafDeterminer);
+        descisionTree = new FuzzyDecisionTree(preferenceMeasure, leafDeterminer);
         
         root = descisionTree.buildTree(d);
         
@@ -122,7 +122,7 @@ public class Example {
         System.out.println("GFID3 fuzzy decision tree, with linear maping function {I(t) = t}");
         preferenceMeasure = new GeneralizedFuzzyPartitionEntropyMeasure();
         leafDeterminer = new GeneralizedLeafDeterminer(0.8);
-        descisionTree = new FuzzyDescisionTreeBase(preferenceMeasure, leafDeterminer);
+        descisionTree = new FuzzyDecisionTree(preferenceMeasure, leafDeterminer);
         
         
         root = descisionTree.buildTree(d);
@@ -148,7 +148,7 @@ public class Example {
         System.out.println("GFID3 fuzzy decision tree, with quadratic maping function {I(t) = t^2}");
         preferenceMeasure = new GeneralizedFuzzyPartitionEntropyMeasure(new QuadraticMappingFunction());
         leafDeterminer = new GeneralizedLeafDeterminer(0.8, new QuadraticMappingFunction());
-        descisionTree = new FuzzyDescisionTreeBase(preferenceMeasure, leafDeterminer);
+        descisionTree = new FuzzyDecisionTree(preferenceMeasure, leafDeterminer);
         
         
         root = descisionTree.buildTree(d);
