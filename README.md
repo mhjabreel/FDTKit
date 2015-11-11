@@ -15,7 +15,7 @@ http://www.sciencedirect.com/science/article/pii/016501149400229Z
 Fachao Li, Dandan Jiang<br/>
 http://link.springer.com/chapter/10.1007%2F978-3-642-23982-3_24
 
-### A generalized fuzzy ID3 algorithm using generalized information entropy (2014) ### 
+### A generalized fuzzy ID3 algorithm using generalized information entropy (2014) ###
 Chenxia Jina, Fachao Lia, Yan Lib<br/>
 http://link.springer.com/chapter/10.1007%2F978-3-642-23982-3_24
 
