@@ -23,51 +23,43 @@ public class FuzzyPartitionEntropyMeasure extends MinimumPreferenceMeasure {
         
         double [] a = null;
         if(evidances != null) {
-            for(int i = 0; i < evidances.length - 1; i += 2) {
-                if(a == null) {
-                    a = dataset.getAttribute(evidances[i]).getFuzzyValues(evidances[i + 1]);
+            a = dataset.getAttribute(evidances[0]).getFuzzyValues(evidances[1]);
+            for(int i = 2; i < evidances.length - 1; i += 2) {
+ 
+                double [] aPrime = dataset.getAttribute(evidances[i]).getFuzzyValues(evidances[i + 1]);
+                a = Utils.min(a, aPrime);
 
-                }
-                else {
-                    double [] aPrime = dataset.getAttribute(evidances[i]).getFuzzyValues(evidances[i + 1]);
-
-                    for(int j = 0; j < aPrime.length; j++) {
-                        a[j] = Math.min(a[j], aPrime[j]);
-                    }
-                }
             }
         }
-        
 
-        
-        double [] mij = new double[terms.size()];
+        double [] mi = new double[terms.size()];
         double [] entropies = new double[terms.size()];
-        int i = 0;
+        int j = 0;
         for(String term : terms) {
             double [] vals = dataset.getAttribute(attribute).getFuzzyValues(term);
             if(a != null) {
                 vals = Utils.min(a, vals);
             }
             
-            mij[i] = Utils.sum(vals);
+            mi[j] = Utils.sum(vals);
             
-            double [] mijk = new double[classTerms.size()];
-            int j = 0;
+            double [] mij = new double[classTerms.size()];
+            int k = 0;
             for(String ck : classTerms) {
                 double [] vals2 = dataset.getAttribute(className).getFuzzyValues(ck);
                 
                 vals2 = Utils.min(vals, vals2);
                 
-                mijk[j++] = Utils.sum(vals2);
+                mij[k++] = Utils.sum(vals2);
             }
             
-            Utils.normalizeWith(mijk, Utils.sum(mijk));
-            entropies[i++] = Utils.entropy(mijk);
+            Utils.normalizeWith(mij, Utils.sum(mij));
+            entropies[j++] = Utils.entropy(mij);
         }
-        Utils.normalizeWith(mij, Utils.sum(mij));
+        Utils.normalizeWith(mi, Utils.sum(mi));
         double s = 0;
-        for(i = 0; i < mij.length; i++) {
-            s += entropies[i] * mij[i];
+        for(int i = 0; i < mi.length; i++) {
+            s += entropies[i] * mi[i];
         }
         return s;        
         

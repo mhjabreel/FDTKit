@@ -9,11 +9,13 @@ import com.fdtkit.fuzzy.data.Attribute;
 import com.fdtkit.fuzzy.data.Dataset;
 import com.fdtkit.fuzzy.data.Row;
 import com.fdtkit.fuzzy.utils.AmbiguityMeasure;
+import com.fdtkit.fuzzy.utils.ExponentialFuzzyEntropy;
 import com.fdtkit.fuzzy.utils.FuzzyPartitionEntropyMeasure;
 import com.fdtkit.fuzzy.utils.GeneralizedFuzzyPartitionEntropyMeasure;
 import com.fdtkit.fuzzy.utils.GeneralizedLeafDeterminer;
 import com.fdtkit.fuzzy.utils.LeafDeterminer;
 import com.fdtkit.fuzzy.utils.LeafDeterminerBase;
+import com.fdtkit.fuzzy.utils.MappingFunction;
 import com.fdtkit.fuzzy.utils.PreferenceMeasure;
 import com.fdtkit.fuzzy.utils.QuadraticMappingFunction;
 import java.io.BufferedReader;
@@ -83,7 +85,7 @@ public class Example {
         for(String rule : rules) {
             System.out.println(rule);
         }
-        
+        System.out.println("Accuracy : " + descisionTree.getAccuracy(rules));
         System.out.println("");
   
         System.out.println("Trainingset Prediction:");
@@ -109,6 +111,8 @@ public class Example {
             System.out.println(rule);
         }
         
+        System.out.println("Accuracy : " + descisionTree.getAccuracy(rules));
+        
         System.out.println("");
   
         System.out.println("Trainingset Prediction:");
@@ -130,9 +134,12 @@ public class Example {
         descisionTree.printTree(root, "");  
         
         rules = descisionTree.generateRules(root);
+        
         for(String rule : rules) {
             System.out.println(rule);
         }
+        
+        System.out.println("Accuracy : " + descisionTree.getAccuracy(rules));
         
         System.out.println("");
   
@@ -160,6 +167,8 @@ public class Example {
             System.out.println(rule);
         }
         
+        System.out.println("Accuracy : " + descisionTree.getAccuracy(rules));
+        
         System.out.println("");
   
         System.out.println("Trainingset Prediction:");
@@ -167,6 +176,32 @@ public class Example {
             double[] cVals = descisionTree.classify(j, d, "Plan", rules);
             for(int i = 0; i < cVals.length; i++) {
                 System.out.print(String.format("%.2f     ", cVals[i]));
+            }
+            System.out.println("");
+        }  
+        
+        System.out.println("GEFID3 fuzzy decision tree");
+        preferenceMeasure = new ExponentialFuzzyEntropy(3, new MappingFunction());
+        leafDeterminer = new GeneralizedLeafDeterminer(0.8, new MappingFunction());
+        descisionTree = new FuzzyDecisionTree(preferenceMeasure, leafDeterminer);
+        
+        
+        root = descisionTree.buildTree(d);
+        
+        descisionTree.printTree(root, "");  
+        
+        rules = descisionTree.generateRules(root);
+        for(String rule : rules) {
+            System.out.println(rule);
+        }
+        System.out.println("Accuracy : " + descisionTree.getAccuracy(rules));
+        System.out.println("");
+  
+        System.out.println("Trainingset Prediction:");
+        for(int j = 0; j < 16; j++) {
+            double[] cVals = descisionTree.classify(j, d, "Plan", rules);
+            for(int i = 0; i < cVals.length; i++) {
+                System.out.print(String.format("%.2f,", cVals[i]));
             }
             System.out.println("");
         }        

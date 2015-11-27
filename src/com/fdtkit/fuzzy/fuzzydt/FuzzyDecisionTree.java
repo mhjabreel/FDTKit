@@ -60,19 +60,26 @@ public class FuzzyDecisionTree  {
             
             for(String term : terms) {
                 boolean canBelongeToClass = false;
+                double bestDOT = Double.MIN_VALUE;
+                String bestClass = "";
                 for (String classTerm : classTerms) {
                     LeafDescriptor ld = leafDeterminer.getLeafDescriptor(dataset, new String[] {bestAttr, term, className, classTerm });
                     if(ld.isLeaf()) {
-                        TreeNode c = new TreeNode(NodeType.VALUE, term);
-                        TreeNode c2 = new TreeNode(NodeType.LEAF, classTerm);
-                        c2.setValue(ld.getDegreeOfTruth());
-                        c.addChild(c2);
-                        root.addChild(c);
                         canBelongeToClass = true;
-                        break;                        
+                        if(ld.getDegreeOfTruth() > bestDOT) {
+                            bestDOT = ld.getDegreeOfTruth();
+                            bestClass = classTerm;
+                        }                
                     }
                 }
-                if(!canBelongeToClass) {
+                if(canBelongeToClass) {
+                    TreeNode c = new TreeNode(NodeType.VALUE, term);
+                    TreeNode c2 = new TreeNode(NodeType.LEAF, bestClass);
+                    c2.setValue(bestDOT);
+                    c.addChild(c2);
+                    root.addChild(c);                    
+                }
+                else {
                     //Remove the best attribute
                     String[] newAttrs = new String[attrs.length - 1];
                     for(int j = 0, k = 0; j < attrs.length; j++) {
@@ -86,10 +93,13 @@ public class FuzzyDecisionTree  {
                     newArgs[0] = bestAttr;
                     newArgs[1] = term;
                     
-                    TreeNode node = new TreeNode(NodeType.VALUE, term);
-                    root.addChild(node);
+
                     TreeNode c = growTree(dataset, newAttrs, newArgs);
-                    node.addChild(c);
+                    if(c != null) {
+                        TreeNode node = new TreeNode(NodeType.VALUE, term);
+                        root.addChild(node);                        
+                        node.addChild(c);
+                    }
                    
                 }                
             }
@@ -110,17 +120,24 @@ public class FuzzyDecisionTree  {
                     List<String> classTerms = dataset.getAttribute(className).getLinguisticTerms();
                     String bestClass = "";
                     double bestDOT = -1;
+                    boolean canBeClass = false;
                     for (String classTerm : classTerms) {
                         args1[args.length + 1] = classTerm;                    
                         LeafDescriptor ld = leafDeterminer.getLeafDescriptor(dataset, args1);
                         if(ld.getDegreeOfTruth() > bestDOT) {
                             bestDOT = ld.getDegreeOfTruth();
                             bestClass = classTerm;
+                            canBeClass = ld.isLeaf();
                         }
                     }
-                    TreeNode c2 = new TreeNode(NodeType.LEAF, bestClass);
-                    c2.setValue(bestDOT);
-                    return c2;
+                    if(canBeClass) {
+                        TreeNode c2 = new TreeNode(NodeType.LEAF, bestClass);
+                        c2.setValue(bestDOT);
+                        return c2;
+                    }
+                    else {
+                        return null;
+                    }
                 }
                 else {
                     TreeNode root = new TreeNode(NodeType.ATTRIBUTE, bestAttr);
@@ -137,7 +154,6 @@ public class FuzzyDecisionTree  {
                         for (String classTerm : classTerms) {
                             args2[args2.length - 1] = classTerm;
                             LeafDescriptor ld = leafDeterminer.getLeafDescriptor(dataset, args2);
-
                             if (ld.isLeaf()) {
                                 TreeNode c = new TreeNode(NodeType.VALUE, term);
                                 TreeNode c2 = new TreeNode(NodeType.LEAF, classTerm);
@@ -163,10 +179,11 @@ public class FuzzyDecisionTree  {
                             newArgs[0] = bestAttr;
                             newArgs[1] = term;
 
-                            TreeNode node = new TreeNode(NodeType.VALUE, term);
-                            root.addChild(node);
+
                             TreeNode c = growTree(dataset, newAttrs, newArgs);
                             if(c != null) { 
+                                TreeNode node = new TreeNode(NodeType.VALUE, term);
+                                root.addChild(node);                                
                                 node.addChild(c);
                             }
 
@@ -186,30 +203,37 @@ public class FuzzyDecisionTree  {
                 System.arraycopy(args, 0, args2, 2, args.length);
                 args2[0] = bestAttr;
                 args2[args2.length - 2] = className;
-                
-                terms.stream().map((term) -> {
+                boolean canBeClass = false;
+                for(String term : terms) {
+                    LeafDescriptor ld;
                     args2[1] = term;
-                    return term;
-                }).forEach((term) -> {
                     double maxTruth = Double.MIN_VALUE;
                     String bestClass = "";
-                    for (String classTerm : classTerms) {
+                    
+                    for(String classTerm : classTerms) {
                         args2[args2.length - 1] = classTerm;
-                        LeafDescriptor ld = leafDeterminer.getLeafDescriptor(dataset, args2);
+                        ld = leafDeterminer.getLeafDescriptor(dataset, args2);
                         if (ld.getDegreeOfTruth() > maxTruth) {
                             maxTruth = ld.getDegreeOfTruth();
                             bestClass = classTerm;
-                        }                    
+                            canBeClass = ld.isLeaf();
+                        }                          
                     }
-                    
-                    TreeNode node = new TreeNode(NodeType.VALUE, term);
-                    root.addChild(node);
-                    TreeNode c = new TreeNode(NodeType.LEAF, bestClass);
-                    
-                    c.setValue(maxTruth);
-                    node.addChild(c);
-                });
-                return root;
+                    if(canBeClass) {
+                        TreeNode node = new TreeNode(NodeType.VALUE, term);
+                        root.addChild(node);
+                        TreeNode c = new TreeNode(NodeType.LEAF, bestClass);
+
+                        c.setValue(maxTruth);
+                        node.addChild(c);                        
+                    }
+                }
+                if(root.getChildrenCount() > 0) {
+                    return root;
+                }
+                else {
+                    return null;
+                }
             }
         }
                
@@ -236,6 +260,23 @@ public class FuzzyDecisionTree  {
             
             
         }
+    }
+    
+    public double getAverageofAccuracy(TreeNode root) {
+        if(root.isLeaf()) {
+            return root.getValue();
+        }
+        double s = 0;
+        List<TreeNode> children = root.getChildren();
+        for(int i =0; i < root.getChildrenCount(); i++) {
+            TreeNode node = children.get(i);
+             if(node.getNodeType() == NodeType.VALUE) {
+            }
+            else {
+                s += getAverageofAccuracy(node);
+            }
+        }  
+        return s;
     }
     
     public void saveTreeToFile(TreeNode root, String tabs, String fileName) {
@@ -285,6 +326,18 @@ public class FuzzyDecisionTree  {
         return s;
     }
     
+    public double getAccuracy(String[] rules) {
+        double s = 0;
+        
+        for(String rule: rules) {
+            double v = Double.parseDouble(rule.substring(rule.indexOf("(") + 1, rule.length() - 1));
+            s += v * 100;
+        }
+        
+        return s / rules.length;
+        
+    }
+    
     public String[] generateRules(TreeNode node) {
 
         String rules = generateRules(node, "");
@@ -297,7 +350,7 @@ public class FuzzyDecisionTree  {
             return null;
         }
         if(node.isLeaf()) {
-            return String.format("%sTHEN %s (%.2f)\n" , prefix, node.getTitle(), node.getValue());
+            return String.format("%sTHEN %s (%.4f)\n" , prefix, node.getTitle(), node.getValue());
         }
         else if(node.isRoot()) {
             String rules = "";
@@ -305,6 +358,7 @@ public class FuzzyDecisionTree  {
             for(TreeNode child : childs) {
                 rules += generateRules(child.getChildren().get(0), String.format("IF %s IS %s ", node.getTitle(), child.getTitle()));
             }
+
             return rules;
         }
         else if(node.getNodeType() == NodeType.ATTRIBUTE) {
@@ -312,7 +366,10 @@ public class FuzzyDecisionTree  {
             List<TreeNode> childs = node.getChildren();
             for(TreeNode child : childs) {
                 rules += generateRules(child.getChildren().get(0), prefix + String.format("AND %s IS %s ", node.getTitle(), child.getTitle()));
+
             }
+
+            
             return rules;                       
         }
         return "";
