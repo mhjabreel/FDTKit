@@ -5,26 +5,22 @@
  */
 package com.fdtkit.fuzzy.utils;
 
-import com.fdtkit.fuzzy.utils.MappingFunction;
-
 /**
  *
- * @author MHJ
+ * @author Mohammed
  */
-public class QuadraticMappingFunction extends MappingFunction {
-
+public class QubicMappingFunction extends MappingFunction {
     @Override
     public double map(double v) {
-        return v * v; //To change body of generated methods, choose Tools | Templates.
+        return v * v * v; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public double[] map(double[] vals) {
         double [] mappedVals = new double[vals.length];
         for(int i = 0; i < vals.length; i++) {
-            mappedVals [i] = Math.pow(vals[i], 2);
+            mappedVals [i] = Math.pow(vals[i], 3);
         }
         return mappedVals; 
-    }
-
+    }    
 }
