@@ -1,6 +1,8 @@
 # FDTKit
 FDTKit is a fuzzy decision tree toolkit includes the state of art fuzzy decision tree algorithms
 
+![MIT](https://img.shields.io/badge/license-MIT-blue.svg)
+
 ### Author: ###
 Mohammed H. Jabreel <br/>
 E-mail: mhjabreel@gmail.com <br/>
@@ -314,3 +316,9 @@ Trainingset Prediction:
 0.30     0.00     0.70     
 0.50     0.50     0.00     
 ```
+
+## License
+
+Copyright (c) 2015 Mohammed Jabreel
+
+The source code is distributed under the MIT license.
