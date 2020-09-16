@@ -10,7 +10,7 @@ import java.util.List;
  *
  * An interface for the fuzzy measures.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public interface FuzzyMeasure extends Serializable {
     

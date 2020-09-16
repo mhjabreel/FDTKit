@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class Random extends java.util.Random {
 

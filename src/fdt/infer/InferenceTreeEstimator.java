@@ -17,7 +17,7 @@ import java.util.Map;
  * It is also used to compute new properties that may be required in the inference phase depending on the type of inference estimator.
  * 
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class InferenceTreeEstimator {
 

@@ -3,7 +3,7 @@ package fdt.fuzzy;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class IdentityFuzzySet implements FuzzySet {
 

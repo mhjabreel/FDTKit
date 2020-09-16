@@ -10,7 +10,7 @@ import java.util.HashMap;
  * and contains text (name of the class) 
  * and support (the classification support for the class) properties. 
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 
 public class DecisionNode extends Node {

@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 /**
  * To compute the fuzzy measure value using the Sugeno Lambda Measure method.
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class SugenoLambdaMeasure extends FuzzyMeasureBase {
 

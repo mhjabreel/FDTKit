@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  *
  * To create a fuzzy variable, e.g. Age.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class Attribute {
 

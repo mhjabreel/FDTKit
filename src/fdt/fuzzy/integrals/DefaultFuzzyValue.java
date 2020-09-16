@@ -8,7 +8,7 @@ import fdt.core.Edge;
 /**
  *
  * To compute the fuzzy value from the decision nodes. 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class DefaultFuzzyValue implements FuzzyValue {
 

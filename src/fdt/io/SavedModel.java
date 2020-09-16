@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * To Save and Load the models.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class SavedModel {
 

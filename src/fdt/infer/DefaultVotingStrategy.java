@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * The default voting strategy method, i.e., the maximum is the winner.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class DefaultVotingStrategy implements VotingStrategy {
 

@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * To represent a linguistic term, e.g. Old.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class Term {
     

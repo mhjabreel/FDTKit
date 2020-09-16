@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * A generic Inference engine that can be used with fuzzy decision trees or fuzzy random forests.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class InferenceEngine implements Serializable {
 

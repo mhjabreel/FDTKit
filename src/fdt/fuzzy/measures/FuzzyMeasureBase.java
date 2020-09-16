@@ -10,7 +10,7 @@ import java.util.List;
  *
  * A base class for the fuzzy measure methods.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public abstract class FuzzyMeasureBase implements FuzzyMeasure {
 

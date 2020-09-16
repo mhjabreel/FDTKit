@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 /**
  * To compute the fuzzy measure value using the Hierarchically Decomposable Fuzzy Measure method.
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class HierarchicallyDecomposableFuzzyMeasure implements FuzzyMeasure {
 

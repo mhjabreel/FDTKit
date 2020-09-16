@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * An inference estimator based on Hierarchal Sugeno Lambda method. 
  * This inference estimator requires an IntegralBasedVotingStrategy based on HierarchicallyDecomposableFuzzyMeasure.
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class HierarchalSugenoLambdaInferenceTreeEstimator extends SugenoLambdaInferenceTreeEstimator {
 

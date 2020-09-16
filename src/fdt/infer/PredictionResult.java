@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 /**
  * To represent the prediction result.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class PredictionResult {
 

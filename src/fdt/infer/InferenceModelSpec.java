@@ -19,7 +19,7 @@ import java.util.Stack;
  * tree: the root of the tree.
  * decisionSets: the list of the decision sets in the tree.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class InferenceModelSpec implements Serializable {
 

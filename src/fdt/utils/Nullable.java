@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  * @param <T>
  */
 public final class Nullable<T> implements Serializable{

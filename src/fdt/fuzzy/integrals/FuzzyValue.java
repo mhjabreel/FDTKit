@@ -9,7 +9,7 @@ import java.io.Serializable;
  *
  * An interface to compute the fuzzy value from a decision node.
  * @see DefaultFuzzyValue
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public interface FuzzyValue extends Serializable {
 

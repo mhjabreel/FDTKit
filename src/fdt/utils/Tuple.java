@@ -3,7 +3,7 @@ package fdt.utils;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  * @param <T1>
  * @param <T2>
  */

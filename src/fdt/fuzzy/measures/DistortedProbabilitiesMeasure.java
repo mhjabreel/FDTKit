@@ -9,7 +9,7 @@ import fdt.core.DecisionSet;
  * To compute the fuzzy measure value using the Distorted Probability method.
  * 
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class DistortedProbabilitiesMeasure extends FuzzyMeasureBase {
 

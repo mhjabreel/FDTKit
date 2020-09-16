@@ -5,7 +5,7 @@ import org.ejml.data.Complex_F64;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class Polynomial {
 

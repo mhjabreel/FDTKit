@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 /**
  * An inference estimator based on Sugeno Lambda method. This inference estimator requires an IntegralBasedVotingStrategy based on SugenoLambdaMeasure.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class SugenoLambdaInferenceTreeEstimator extends InferenceTreeEstimator {
 

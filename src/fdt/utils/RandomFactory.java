@@ -6,7 +6,7 @@ import java.util.stream.LongStream;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class RandomFactory {
 

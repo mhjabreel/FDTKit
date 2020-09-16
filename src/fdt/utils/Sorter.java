@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  * @param <T>
  */
 public class Sorter<T> {

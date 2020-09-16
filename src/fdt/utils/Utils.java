@@ -31,7 +31,7 @@ import org.ejml.interfaces.decomposition.EigenDecomposition_F64;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class Utils {
 

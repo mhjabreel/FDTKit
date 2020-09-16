@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 
  * @see FuzzyIntegralBase
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public interface FuzzyIntegral extends Serializable {
     

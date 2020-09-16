@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class TrainableEdge extends EdgeBase {
 

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * We get the prediction from the set of the rules in a FDT in this voting 
  * strategy by aggregating these decisions using a fuzzy integral method.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class IntegralBasedVotingStrategy extends DefaultVotingStrategy {
 

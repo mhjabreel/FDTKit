@@ -14,7 +14,7 @@ import java.util.List;
  * An abstract class for the fuzzy integral methods. 
  * Each fuzzy integral needs a fuzzy measure method and a fuzzy value method.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public abstract class FuzzyIntegralBase implements FuzzyIntegral {
 

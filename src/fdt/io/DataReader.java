@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 /**
  * To read the data from the CSV and the variable definition files.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */ 
 
 

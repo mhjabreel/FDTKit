@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public abstract class IntermediateNodeBase extends Node {
 

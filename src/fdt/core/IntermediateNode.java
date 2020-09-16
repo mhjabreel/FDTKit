@@ -10,7 +10,7 @@ import java.util.HashMap;
  * This class is used in the inference phase by removing some information 
  * used only in the training phase. @see TrainableIntermediateNode
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class IntermediateNode extends IntermediateNodeBase {
 

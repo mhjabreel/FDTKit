@@ -5,7 +5,7 @@ import fdt.fuzzy.measures.FuzzyMeasure;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class SugenoIntegral extends FuzzyIntegralBase {
 

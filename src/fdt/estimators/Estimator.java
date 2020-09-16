@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public interface Estimator extends Serializable {
     

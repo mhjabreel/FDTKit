@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
  *
  * To create a fuzzy dataset.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class Dataset {
 

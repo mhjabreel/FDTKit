@@ -15,7 +15,7 @@ import java.util.List;
  * ii) decisionNodes: the list of the decision nodes that belong to this set.
  * iii) estimator: an intermediate node that represents the root of the estimator in which the list of nodes come from.
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class DecisionSet implements Serializable {
 

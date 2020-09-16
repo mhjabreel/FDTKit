@@ -3,7 +3,7 @@ package fdt.core;
 
 /**
  *
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public class Edge extends EdgeBase {
 

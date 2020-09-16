@@ -7,7 +7,7 @@ import java.io.Serializable;
  * An abstract class represents an edge in the tree context and 
  * a languistic term in the fuzzy logic context, e.g, Old term of the Age attribute.  
  * 
- * @author Najlaa Maaroof
+ * @author Mohammed Jabreel
  */
 public abstract class EdgeBase implements TreeItem {
 
